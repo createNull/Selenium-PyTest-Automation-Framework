@@ -1,6 +1,6 @@
 # Selenium-PyTest-Automation-Framework
 
-## Prerequisites:
+## Prerequisites
 *   Python 3.x
 
 ## Browsers supported
@@ -37,9 +37,9 @@ pytest --html report.html
 ```
 
 ## Rules
-*     Standard fare is £2
-*     People under 16 travel at half price
-*     People 60 or over travel free
-*     Anyone travelling off-peak receives a 25% discount
-*     Peak travel is from 7.30am up to and including 5.30pm
-*     The date of travel must be tomorrow or after
+*   Standard fare is £2
+*   People under 16 travel at half price
+*   People 60 or over travel free
+*   Anyone travelling off-peak receives a 25% discount
+*   Peak travel is from 7.30am up to and including 5.30pm
+*   The date of travel must be tomorrow or after
