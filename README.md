@@ -1,5 +1,8 @@
 # Selenium-PyTest-Automation-Framework
 
+Build from scratch Web Test Automation Framework with pytest and selenium.
+This framework provides testing for functionality as well as input field validation. Tests can be run in parallel to improve execution time.
+
 ## Prerequisites
 *   Python 3.x
 
