@@ -1,28 +1,31 @@
 """Config file for pytest fixtures and hooks."""
 
 from pytest import fixture, mark
-from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium import webdriver
 from helpers import URL
 from datetime import datetime
 
-chrome_options = ChromeOptions()
-chrome_options.add_argument("--headless")  # remove this if you want to see the browser running
-
-firefox_options = FirefoxOptions()
-firefox_options.add_argument("--headless")  # remove this if you want to see the browser running
-
 
 @fixture
-def driver(request):
-    driver = webdriver.Chrome(options=chrome_options)
-    # driver = webdriver.Firefox(options=firefox_options)  # need to automate this
+def driver(request, browser):
+    if browser.lower() == 'firefox':
+        firefox_options = webdriver.FirefoxOptions()
+        firefox_options.add_argument("--headless")  # remove this if you want to see the browser running
+        driver = webdriver.Firefox(options=firefox_options)
+    else:
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument("--headless")  # remove this if you want to see the browser running
+        driver = webdriver.Chrome(options=chrome_options)
     driver.get(URL)
     request.instance.driver = driver
 
     yield driver
     driver.close()
+
+
+@fixture
+def browser(request):
+    return request.config.getoption('-B')
 
 
 @mark.hookwrapper
@@ -48,3 +51,11 @@ def pytest_runtest_makereport(item, call):
                            f'style="width:304px;height:228px;" onclick="window.open(this.src)" align="right"/></div>'
                     extra.append(pytest_html.extras.html(html))
         report.extra = extra
+
+
+def pytest_addoption(parser):
+    parser.addoption("-B", "--browser",
+                     dest="browser",
+                     action="store",
+                     default='Chrome',
+                     help="Browser. Valid options are chrome and firefox")
