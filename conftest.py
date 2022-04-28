@@ -11,11 +11,17 @@ def driver(request, browser):
     if browser.lower() == 'firefox':
         firefox_options = webdriver.FirefoxOptions()
         firefox_options.add_argument("--headless")  # remove this if you want to see the browser running
-        driver = webdriver.Firefox(options=firefox_options)
+        driver = webdriver.Firefox(
+            executable_path=GeckoDriverManager().install(),
+            options=firefox_options
+        )
     else:
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--headless")  # remove this if you want to see the browser running
-        driver = webdriver.Chrome(options=chrome_options)
+        driver = webdriver.Chrome(
+            ChromeDriverManager().install(),
+            chrome_options=chrome_options
+        )
     driver.get(URL)
     request.instance.driver = driver
 
