@@ -29,9 +29,6 @@ pytest -vs -nauto
 ```
 ## Directories
 *   `tests` - test files
-*   `drivers` - place your webdrivers here 
-    *   [chromedriver](https://sites.google.com/a/chromium.org/chromedriver/)
-    *   [geckdodriver](https://github.com/mozilla/geckodriver/releases)
 *   `screenshots` - test failure screenshots
 
 ## Reporting with screenshots
