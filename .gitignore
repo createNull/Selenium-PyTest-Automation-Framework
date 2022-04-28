@@ -128,8 +128,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Web drivers
-drivers/*
-
 # Screenshots
 screenshots/*
