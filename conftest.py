@@ -1,11 +1,14 @@
 """Config file for pytest fixtures and hooks."""
 
+from datetime import datetime
+
 from pytest import fixture, mark
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
+
 from helpers import URL
-from datetime import datetime
 
 
 @fixture
@@ -14,14 +17,14 @@ def driver(request, browser):
         firefox_options = webdriver.FirefoxOptions()
         firefox_options.add_argument("--headless")  # remove this if you want to see the browser running
         driver = webdriver.Firefox(
-            executable_path=GeckoDriverManager().install(),
+            service=Service(GeckoDriverManager().install()),
             options=firefox_options
         )
     else:
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--headless")  # remove this if you want to see the browser running
         driver = webdriver.Chrome(
-            ChromeDriverManager().install(),
+            service=Service(ChromeDriverManager().install()),
             chrome_options=chrome_options
         )
     driver.get(URL)
