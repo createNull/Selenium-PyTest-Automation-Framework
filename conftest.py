@@ -31,7 +31,7 @@ def driver(request, browser):
     request.instance.driver = driver
 
     yield driver
-    driver.close()
+    driver.quit()
 
 
 @fixture
