@@ -39,6 +39,14 @@ def browser(request):
     return request.config.getoption('-B')
 
 
+def pytest_addoption(parser):
+    parser.addoption("-B", "--browser",
+                     dest="browser",
+                     action="store",
+                     default='Chrome',
+                     help="Browser. Valid options are chrome and firefox")
+
+
 @mark.hookwrapper
 def pytest_runtest_makereport(item, call):
     """
@@ -62,11 +70,3 @@ def pytest_runtest_makereport(item, call):
                            f'style="width:304px;height:228px;" onclick="window.open(this.src)" align="right"/></div>'
                     extra.append(pytest_html.extras.html(html))
         report.extra = extra
-
-
-def pytest_addoption(parser):
-    parser.addoption("-B", "--browser",
-                     dest="browser",
-                     action="store",
-                     default='Chrome',
-                     help="Browser. Valid options are chrome and firefox")
